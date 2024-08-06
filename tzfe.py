@@ -39,3 +39,57 @@ def main():
             brick = pygame.Rect(col * (BRICK_WIDTH + 10) + 30, row * (BRICK_HEIGHT + 10) + 30, BRICK_WIDTH, BRICK_HEIGHT)
             bricks.append(brick)
 
+    running = True
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_LEFT] and paddle.left > 0:
+            paddle.x -= paddle_speed
+        if keys[pygame.K_RIGHT] and paddle.right < WIDTH:
+            paddle.x += paddle_speed
+
+        ball.x += ball_dx
+        ball.y += ball_dy
+
+        if ball.left <= 0 or ball.right >= WIDTH:
+            ball_dx = -ball_dx
+        if ball.top <= 0:
+            ball_dy = -ball_dy
+        if ball.bottom >= HEIGHT:
+            pygame.time.delay(500)  
+            ball.x = WIDTH // 2 - BALL_SIZE // 2
+            ball.y = HEIGHT // 2 - BALL_SIZE // 2
+            ball_dx, ball_dy = BALL_SPEED_X, BALL_SPEED_Y
+
+       
+        if ball.colliderect(paddle):
+            ball_dy = -ball_dy
+
+       
+        for brick in bricks:
+            if ball.colliderect(brick):
+                ball_dy = -ball_dy
+                bricks.remove(brick)
+                break  
+
+        if not bricks:
+            print("You win!")
+            pygame.time.delay(2000) 
+            running = False
+
+      
+        screen.fill(BLACK)
+        pygame.draw.rect(screen, WHITE, paddle)
+        pygame.draw.ellipse(screen, GREEN, ball)
+        draw_bricks(bricks)
+        pygame.display.flip()
+        clock.tick(60)  
+
+    pygame.quit()
+
+if __name__ == "__main__":
+    main()
+
