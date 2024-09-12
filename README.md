@@ -29,8 +29,9 @@ The more tiles you destroy, the higher your score! :100:
 
 ## Some screenshots for you :)
 - watch it in action!
-    - [here]()
-    - [another!]()
+    - [here](https://github.com/user-attachments/assets/29ecb2a1-5daa-4ea8-ad26-8d0fb53131c6)
+    - [another after some time](https://github.com/user-attachments/assets/e082aa13-919f-4495-9961-f43278d78de7)
+
 
 
 ## Customization :wrench:
